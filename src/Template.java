@@ -6,8 +6,12 @@ import java.awt.image.BufferStrategy;
 public class Template extends Canvas implements Runnable{
     private BufferStrategy bs;
 
+    private int mouseX = 0;
     private boolean running = false;
     private Thread thread;
+
+    private int pressX;
+    private int pressY;
 
     public Template() {
         setSize(600,400);
@@ -38,7 +42,11 @@ public class Template extends Canvas implements Runnable{
     }
 
     public void draw(Graphics g) {
-        g.clearRect(0,0,getWidth(),getHeight());
+       // g.clearRect(10,20,getWidth(),getHeight());
+
+        g.fillOval (pressX, pressY, 5,5 );
+
+
     }
 
     private void update() {
@@ -65,7 +73,7 @@ public class Template extends Canvas implements Runnable{
     }
 
     public void run() {
-        double ns = 1000000000.0 / 25.0;
+        double ns = 1000000000.0 / 169.0;
         double delta = 0;
         long lastTime = System.nanoTime();
 
@@ -89,10 +97,17 @@ public class Template extends Canvas implements Runnable{
 
         @Override
         public void mouseDragged(MouseEvent e) {
+            pressX = e.getX();
+            pressY = e.getY();
+
         }
 
         @Override
         public void mouseMoved(MouseEvent e) {
+           int  mouseX = e.getX();
+           int mouseY = e.getY();
+
+
         }
     }
 
@@ -100,10 +115,12 @@ public class Template extends Canvas implements Runnable{
 
         @Override
         public void mouseClicked(MouseEvent e) {
+
         }
 
         @Override
         public void mousePressed(MouseEvent e) {
+
         }
 
         @Override
