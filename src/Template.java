@@ -13,11 +13,14 @@ public class Template extends Canvas implements Runnable{
     private int pressX;
     private int pressY;
 
+    private boolean isTimeToClear;
+
+
     public Template() {
         setSize(600,400);
         JFrame frame = new JFrame();
         frame.add(this);
-        frame.addKeyListener(new MyKeyListener());
+        this.addKeyListener(new MyKeyListener());
         this.addMouseMotionListener(new MyMouseMotionListener());
         this.addMouseListener(new MyMouseListener());
         requestFocus();
@@ -42,9 +45,14 @@ public class Template extends Canvas implements Runnable{
     }
 
     public void draw(Graphics g) {
-       // g.clearRect(10,20,getWidth(),getHeight());
+        if (isTimeToClear == true) {
+            g.clearRect(10,20,getWidth(),getHeight());
+            isTimeToClear = false;
+        }
 
         g.fillOval (pressX, pressY, 5,5 );
+
+
 
 
     }
@@ -73,7 +81,7 @@ public class Template extends Canvas implements Runnable{
     }
 
     public void run() {
-        double ns = 1000000000.0 / 169.0;
+        double ns = 1000000000.0 / 600.0;
         double delta = 0;
         long lastTime = System.nanoTime();
 
@@ -138,16 +146,22 @@ public class Template extends Canvas implements Runnable{
 
     public class MyKeyListener implements KeyListener {
 
+
         @Override
         public void keyTyped(KeyEvent e) {
+
         }
 
         @Override
         public void keyPressed(KeyEvent e) {
+            if (e.getKeyChar() == 'c' )  {
+                isTimeToClear = true;
+            }
         }
 
         @Override
         public void keyReleased(KeyEvent e) {
         }
+
     }
 }

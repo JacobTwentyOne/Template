@@ -1,3 +1,14 @@
 Jag tänker göre ett simpelt "paint" spel då det kommer färg där man klickar
 
 Jag tänker att man kan sudda igenom att byta färg
+
+
+nu fungerar programmet som tänkt, jag gjorde så att man suddar med knappen C vilket rensar hela skärmen
+
+När man klickar och drar musen målas det efter musen.
+
+controls är
+
+ m1+drag = draw
+ C = Clear
+
